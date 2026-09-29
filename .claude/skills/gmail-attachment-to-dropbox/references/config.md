@@ -2,7 +2,8 @@
 
 | 項目 | 値 |
 |---|---|
-| Email to Dropbox アドレス | 未設定 |
+| Email to Dropbox アドレス | yamamoto@tokyoadvisory.com |
+| 動作確認 | 未検証（初回転送で Email Attachments に届くか確認したら「確認済」に更新） |
 | 添付の保存先フォルダ | `/Yamamoto Mamiko/Email Attachments`（初回転送後に実際のパスを確認して更新する） |
 
 ## アドレスの確認・有効化方法
