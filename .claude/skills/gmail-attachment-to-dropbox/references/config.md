@@ -3,8 +3,8 @@
 | 項目 | 値 |
 |---|---|
 | Email to Dropbox アドレス | 未設定（公開リポジトリのため記載しない。claude.ai に登録するスキルにだけ記入する） |
-| 動作確認 | 未検証（初回転送で Email Attachments に届くか確認したら「確認済」に更新） |
-| 添付の保存先フォルダ | `/Yamamoto Mamiko/Email Attachments`（初回転送後に実際のパスを確認して更新する） |
+| 動作確認 | 確認済（2026-09-29、転送後およそ1分で到着） |
+| 添付の保存先フォルダ | `/Yamamoto Mamiko/Email Attachments`（確認済） |
 
 ## アドレスの確認・有効化方法
 
