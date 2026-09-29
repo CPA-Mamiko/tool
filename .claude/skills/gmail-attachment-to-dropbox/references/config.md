@@ -2,15 +2,15 @@
 
 | 項目 | 値 |
 |---|---|
-| Email to Dropbox アドレス | yamamoto@tokyoadvisory.com |
+| Email to Dropbox アドレス | 未設定（公開リポジトリのため記載しない。claude.ai に登録するスキルにだけ記入する） |
 | 動作確認 | 未検証（初回転送で Email Attachments に届くか確認したら「確認済」に更新） |
 | 添付の保存先フォルダ | `/Yamamoto Mamiko/Email Attachments`（初回転送後に実際のパスを確認して更新する） |
 
 ## アドレスの確認・有効化方法
 
-1. ブラウザで Dropbox にログイン → 右上のアイコン → **設定**
-2. **メール to Dropbox**（Email to Dropbox）を開く
-3. 表示される `xxxx@dropbox.com` 形式のアドレスをコピーし、上の表に記入する
+1. チーム管理者が 管理コンソール → 設定 → 製品と機能 → コンテンツ で **Email to Dropbox** をオンにする
+2. ブラウザで Dropbox にログイン → 右上のアイコン → **設定** → 全般タブを下へスクロール → **メール to Dropbox** の「固有のメール アドレスを作成」
+3. 表示される `xxxx@addtodropbox.com` 形式のアドレスをコピーし、上の表に記入する
    （無効になっている場合はオンにする）
 
 - このアドレスに届いたメールの添付は `Email Attachments` フォルダに保存される。
