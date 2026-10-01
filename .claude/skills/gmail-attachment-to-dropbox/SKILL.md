@@ -152,6 +152,7 @@ Slack からファイルの中身を取り出して送り直す必要はない�
 | 送り主（Slack 表示名） | ファイル名の例 | 保存先 |
 |---|---|---|
 | 井上雄貴（井上会計事務所、外部 Slack Connect） | `Mothly TimeCharge_2609井上.xlsx`（`YYMM` が対象月） | `GENERAL/Advisor/Inoue/invoice` |
+| 吉見（社内） | `Yoshimi_Time_Charge_Aug_2026.pdf` | `GENERAL/Advisor/Yoshimi` |
 
 - 送られてくる場所: 井上さんとの DM、または 吉見さん・井上さん・山本のグループ DM（2026年10月からはこちら）。
   同じ月の月報が両方に送られることがあるので、保存は1つだけにする（サイズが違えば新しい方）。
@@ -162,6 +163,8 @@ Slack からファイルの中身を取り出して送り直す必要はない�
   2. 井上さんに Dropbox ファイルリクエストからアップロードしてもらう。
      作成済み（2026-10-01、期限なし）: タイトル「月報（Monthly TimeCharge）提出 - 井上」、
      保存先 `GENERAL/Advisor/Inoue/invoice`。リンクは `list_file_requests` で確認する。
+- 吉見さんの月報も、同じ日に作ったファイルリクエスト「月報（Time Charge）提出 - 吉見」
+  （保存先 `GENERAL/Advisor/Yoshimi`）から提出してもらう。
 - 対応後、保存先フォルダに当月分があるかを確認して報告する。
 
 ## 注意
