@@ -11,8 +11,8 @@ description: KOMOJU で決済された入金（クレジットカード・PayPay
 |---|---|
 | freee 事業所 | 株式会社東京アドバイザリー（company_id `180960`） |
 | 取り込み先の口座 | `KOMOJU`（walletable_type `wallet`、walletable_id `6802773`） |
-| KOMOJU の秘密鍵 | 環境変数 `KOMOJU_SECRET_KEY`（環境の設定で登録。チャットに貼ってもらわない） |
-| ネットワーク | 環境の Network access で `komoju.com` を許可しておく |
+| KOMOJU の秘密鍵 | クラウド環境の「API認証情報」に登録（許可するウェブサイト `komoju.com`、Basic 認証：ユーザー名＝非公開鍵、パスワード空）。鍵はセッションに見えず、プロキシが付ける。環境変数やチャットには入れない |
+| ネットワーク | API認証情報を登録したホストは Trusted のままでも通る |
 
 freee の MCP は「現在の事業所」と違う company_id を受け付けないので、最初に `freee_set_current_company` で
 `180960` に切り替える。作業が終わったら、元の事業所に戻す必要があるかユーザーに聞く。
@@ -48,7 +48,7 @@ python3 .claude/skills/komoju-to-freee/scripts/fetch_komoju.py --from <開始日
 - 初回、または出力の `description` が名前になっていないときは、`--debug` で1件目の生データを見て、
   スクリプトの `payer_name()` / `method()` が使う項目を直す（KOMOJU の項目名は API で確かめていない）。
 - `skip` が付いた行（未完了・期限切れ・外貨など）は登録しないが、計画表に「対象外」として出す。
-- `komoju.com` に接続できない（403）ときは、ネットワークの許可が無い。ユーザーに伝えて止まる。
+- `komoju.com` に接続できない（403）、または 401 が返るときは、API認証情報が未登録か誤り。ユーザーに伝えて止まる。
 
 ### 3. 重複を除く
 

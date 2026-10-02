@@ -5,7 +5,9 @@
   python3 fetch_komoju.py --from 2026-07-04 --to 2026-10-02 > komoju_rows.json
   python3 fetch_komoju.py --from 2026-07-04 --to 2026-10-02 --debug   # 1件目の生データを表示
 
-環境変数 KOMOJU_SECRET_KEY（KOMOJU の秘密鍵 sk_live_...）を読む。鍵は表示・保存しない。
+認証: 通常はクラウド環境の「API認証情報」（許可するウェブサイト komoju.com）に鍵を登録しておき、
+エージェントプロキシが komoju.com へのリクエストに認証ヘッダーを付ける（スクリプトは鍵を持たない）。
+環境変数 KOMOJU_SECRET_KEY があればそれで Basic 認証する。鍵は表示・保存しない。
 """
 import argparse
 import base64
@@ -22,8 +24,10 @@ JST = dt.timezone(dt.timedelta(hours=9))
 
 def get(params, key):
     url = API + "?" + urllib.parse.urlencode(params)
-    auth = base64.b64encode((key + ":").encode()).decode()
-    req = urllib.request.Request(url, headers={"Authorization": "Basic " + auth, "Accept": "application/json"})
+    headers = {"Accept": "application/json"}
+    if key:
+        headers["Authorization"] = "Basic " + base64.b64encode((key + ":").encode()).decode()
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
 
@@ -56,9 +60,7 @@ def main():
     ap.add_argument("--debug", action="store_true")
     a = ap.parse_args()
 
-    key = os.environ.get("KOMOJU_SECRET_KEY")
-    if not key:
-        sys.exit("KOMOJU_SECRET_KEY が設定されていません")
+    key = os.environ.get("KOMOJU_SECRET_KEY")  # 無ければプロキシが付ける認証に任せる
 
     start = dt.datetime.fromisoformat(a.start).replace(tzinfo=JST)
     end = dt.datetime.fromisoformat(a.end).replace(tzinfo=JST) + dt.timedelta(days=1)
