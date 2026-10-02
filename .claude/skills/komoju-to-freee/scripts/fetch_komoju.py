@@ -39,16 +39,27 @@ def jst_date(iso):
     return t.astimezone(JST).date().isoformat()
 
 
+def has_cjk(s):
+    return any("\u3040" <= ch <= "\u30ff" or "\u4e00" <= ch <= "\u9fff" for ch in s)
+
+
 def payer_name(p):
+    # KOMOJU（Wix 経由）は customer_family_name / customer_given_name に名前が入る。
+    # 既存明細に合わせ、日本語名は「姓 名」、それ以外は「given family」の順（例: EMI SANO, 佐野 アミル）。
+    fam = (p.get("customer_family_name") or "").strip()
+    giv = (p.get("customer_given_name") or "").strip()
+    if fam or giv:
+        parts = [fam, giv] if has_cjk(fam + giv) else [giv, fam]
+        return " ".join(x for x in parts if x)
     d = p.get("payment_details") or {}
-    for v in (d.get("name"), d.get("family_name") and f"{d.get('family_name')} {d.get('given_name') or ''}".strip(),
-              (p.get("metadata") or {}).get("name"), d.get("email"), p.get("customer")):
+    for v in (d.get("name"), (p.get("metadata") or {}).get("name"), d.get("email"), p.get("customer")):
         if v:
             return str(v)
     return p.get("id", "")
 
 
 def method(p):
+    # クレジットカードはブランド（visa, master, jcb, american_express）、それ以外は種類（paypay, bank_transfer）
     d = p.get("payment_details") or {}
     return d.get("brand") or d.get("type") or ""
 
