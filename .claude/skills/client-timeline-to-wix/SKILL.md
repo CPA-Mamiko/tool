@@ -69,13 +69,16 @@ Wix のツールを使う前に `WixREADME` を1回呼ぶ（Wix MCP の決まり
 {
   "fromLocalDate": "<最初の予定の日>T00:00:00",
   "toLocalDate": "<最後の予定の日>T23:59:59",
-  "query": { "filter": { "scheduleId": "<config の scheduleId>" }, "cursorPaging": { "limit": 100 } },
+  "query": { "cursorPaging": { "limit": 100 } },
   "fields": ["PI_FIELDS"]
 }
 ```
 
+`scheduleId` で絞り込まない。予約（来社相談・Dinner Meeting など）はサービスごとのスケジュールに入っていて、
+山本真美子のスケジュール ID で絞ると出てこない（予約側では `resources[].scheduleId` に山本真美子が入る）。
 `PI_FIELDS` を付けないとタイトルが返らない。`pagingMetadata.hasNext` が true なら続きも読む。
 同じ日に同じクライアント名を含むタイトルの予定があれば、計画表で「登録済みの可能性」として示す。
+なお、ダッシュボードで斜線付きで表示される「ブロック時間」（研修会・懇親会など）はこの API では返ってこない。
 
 ### 5. 計画を提示して確認を取る（必須）
 
